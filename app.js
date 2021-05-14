@@ -21,33 +21,30 @@ const getPlayerChoice = () => {
   ) {
     alert("We will choose for you - We have chosen Rock");
     return DEFAULT_USER_CHOICE;
-  } else {
-    return playerChoice;
   }
+  return playerChoice;
 };
 
 const getComputerChoice = () => {
   const randomNumber = Math.random();
-  if (0 <= randomNumber < 0.33) {
+  if (randomNumber < 0.33) {
     return ROCK;
   }
-  if (0.33 <= randomNumber < 0.66) {
+  if (randomNumber < 0.66) {
     return PAPER;
-  }
-
-  if (0.66 <= randomNumber <= 1) {
+  } else {
     return SCISSORS;
   }
 };
 
 const getWinner = (playerSelection, computerSelection) => {
   if (
-    (playerSelection === ROCK && computerSelection === SCISSORS) ||
-    (playerSelection === PAPER && computerSelection === ROCK) ||
-    (playerSelection === SCISSORS && computerSelection === PAPER)
+    (playerSelection == ROCK && computerSelection == SCISSORS) ||
+    (playerSelection == PAPER && computerSelection == ROCK) ||
+    (playerSelection == SCISSORS && computerSelection == PAPER)
   ) {
     return RESULT_WIN;
-  } else if (playerSelection === computerSelection) {
+  } else if (playerSelection == computerSelection) {
     return RESULT_DRAW;
   } else {
     return RESULT_LOSE;
@@ -63,7 +60,6 @@ const printWinner = (winner, pSelection, cSelection) => {
   } else {
     message = message + ` You lose!`;
   }
-  console.log(message);
   return message;
 };
 
@@ -77,6 +73,6 @@ startGameBtn.addEventListener("click", () => {
   const computerSelection = getComputerChoice();
   const winner = getWinner(playerSelection, computerSelection);
   const logWinner = printWinner(winner, playerSelection, computerSelection);
-  console.log(logWinner);
+  alert(logWinner);
   gameIsRunning = false;
 });
